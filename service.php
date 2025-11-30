@@ -7,39 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="assets/css/service.css">
     
-    <style>
-        :root { --primary-blue: #0f204b; --accent-blue: #2a5bd7; --accent-gold: #fbbf24; --success-green: #10b981; --bg-light: #f8faff; --text-dark: #1e293b; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: var(--text-dark); overflow-x: hidden; }
-        
-        .navbar { background: rgba(15, 32, 75, 0.95); padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .navbar-brand img { height: 70px; width: 70px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.2); margin-right: 15px; }
-        .brand-text { font-size: 1.6rem; font-weight: 700; color: white; line-height: 1; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px; }
-        .nav-link { color: rgba(255,255,255,0.8) !important; font-weight: 500; font-size: 1rem; margin-left: 25px; transition: 0.3s; }
-        .nav-link:hover, .nav-link.active { color: var(--accent-gold) !important; font-weight: 700; }
-
-        .page-hero { background: linear-gradient(135deg, #030b18 0%, #0f204b 100%); padding: 100px 0 80px 0; text-align: center; color: white; position: relative; margin-bottom: -50px; padding-bottom: 120px; }
-        .hero-title { font-weight: 800; font-size: 3.5rem; text-transform: uppercase; letter-spacing: 2px; }
-        .hero-subtitle { color: var(--accent-gold); font-size: 1.2rem; font-weight: 500; letter-spacing: 1px; margin-top: 10px; max-width: 700px; margin-left: auto; margin-right: auto; }
-
-        .services-wrapper { position: relative; z-index: 10; padding-bottom: 80px; }
-        .service-container-card { background: white; border-radius: 20px; padding: 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); margin-bottom: 40px; border-left: 6px solid var(--accent-gold); transition: transform 0.3s ease; }
-        .service-container-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-        .service-header { display: flex; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .service-icon-box { width: 80px; height: 80px; background: rgba(42, 91, 215, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 25px; color: var(--primary-blue); font-size: 2.5rem; }
-        .service-title { font-size: 2rem; font-weight: 700; color: var(--primary-blue); margin: 0; }
-        
-        .aesthetic-list { list-style: none; padding: 0; margin: 0; }
-        .aesthetic-list li { position: relative; padding-left: 35px; margin-bottom: 15px; font-size: 1.05rem; color: #555; font-weight: 500; }
-        .aesthetic-list li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 3px; color: var(--success-green); font-size: 1.2rem; }
-        .issuance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 40px; }
-        @media (max-width: 768px) { .issuance-grid { grid-template-columns: 1fr; } .service-header { flex-direction: column; text-align: center; } .service-icon-box { margin-right: 0; margin-bottom: 15px; } }
-
-        footer { background-color: #030511; color: white; padding-top: 70px; margin-top: 50px; }
-        .footer-logo { height: 90px; width: 90px; border-radius: 50%; object-fit: cover; border: 2px solid transparent; }
-        .footer-logo-text { font-family: 'Impact', sans-serif; font-size: 2rem; line-height: 1; text-transform: uppercase; margin-left: 15px; }
-        .copyright-bar { background-color: #1a1f36; padding: 20px 0; margin-top: 50px; text-align: center; font-size: 0.9rem; color: #aaa; }
-    </style>
+   
 </head>
 <body>
 

@@ -7,38 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/contact.css">
     
-    <style>
-        :root { --primary-blue: #0f204b; --accent-blue: #2a5bd7; --accent-gold: #fbbf24; --bg-light: #f8faff; --text-dark: #1e293b; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: var(--text-dark); overflow-x: hidden; }
-        
-        .navbar { background: rgba(15, 32, 75, 0.95); padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .navbar-brand img { height: 70px; width: 70px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.2); margin-right: 15px; }
-        .brand-text { font-size: 1.6rem; font-weight: 700; color: white; line-height: 1; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px; }
-        .nav-link { color: rgba(255,255,255,0.8) !important; font-weight: 500; font-size: 1rem; margin-left: 25px; transition: 0.3s; }
-        .nav-link:hover, .nav-link.active { color: var(--accent-gold) !important; font-weight: 700; }
-
-        .page-hero { background: linear-gradient(135deg, #030b18 0%, #0f204b 100%); padding: 80px 0 100px 0; text-align: center; color: white; position: relative; margin-bottom: -60px; }
-        .hero-title { font-weight: 800; font-size: 3.5rem; text-transform: uppercase; letter-spacing: 2px; }
-        .hero-subtitle { color: var(--accent-gold); font-size: 1.2rem; font-weight: 500; letter-spacing: 1px; margin-top: 10px; }
-
-        .map-container-card { background: white; border-radius: 20px; padding: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); position: relative; z-index: 10; border-bottom: 5px solid var(--accent-gold); }
-        .map-frame { width: 100%; height: 450px; border-radius: 15px; border: none; }
-
-        .contact-info-section { padding: 60px 0 80px 0; }
-        .contact-card { background: white; border-radius: 15px; padding: 30px; text-align: center; height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid var(--primary-blue); }
-        .contact-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(15, 32, 75, 0.15); }
-        .icon-box { width: 60px; height: 60px; background: rgba(15, 32, 75, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; color: var(--primary-blue); font-size: 1.5rem; transition: 0.3s; }
-        .contact-card:hover .icon-box { background: var(--primary-blue); color: white; }
-        .info-title { font-weight: 700; color: var(--primary-blue); margin-bottom: 5px; font-size: 1.2rem; }
-        .info-role { color: var(--accent-blue); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .info-detail { color: #555; font-size: 0.95rem; line-height: 1.6; }
-
-        footer { background-color: #030511; color: white; padding-top: 70px; margin-top: 50px; }
-        .footer-logo { height: 90px; width: 90px; border-radius: 50%; object-fit: cover; border: 2px solid transparent; }
-        .footer-logo-text { font-family: 'Impact', sans-serif; font-size: 2rem; line-height: 1; text-transform: uppercase; margin-left: 15px; }
-        .copyright-bar { background-color: #1a1f36; padding: 20px 0; margin-top: 50px; text-align: center; font-size: 0.9rem; color: #aaa; }
-    </style>
 </head>
 <body>
 
