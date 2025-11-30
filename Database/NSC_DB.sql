@@ -1,0 +1,1 @@
+SELECT * FROM nsc_db.registrars;
