@@ -9,6 +9,8 @@
         .hb-2 { width: 400px; height: 400px; background: rgba(42, 91, 215, 0.2); bottom: -100px; right: -100px; animation-delay: 1s; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
+
+
         .btn-registrar {
             background: linear-gradient(90deg, #d97706, #fbbf24);
             border: none; border-radius: 50px; width: 100%; padding: 15px;
