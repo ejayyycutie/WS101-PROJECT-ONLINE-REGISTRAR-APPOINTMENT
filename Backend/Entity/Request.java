@@ -29,6 +29,9 @@ public class Request {
     private LocalTime appointmentTime;
 
 
+
+
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getTransactionCode() { return transactionCode; }
