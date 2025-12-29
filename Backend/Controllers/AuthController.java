@@ -13,6 +13,8 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class AuthController {
 
+
+
     private final StudentRepository studentRepo;
     private final RegistrarRepository registrarRepo;
 
