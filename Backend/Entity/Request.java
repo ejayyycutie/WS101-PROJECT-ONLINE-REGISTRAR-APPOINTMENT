@@ -18,7 +18,7 @@ public class Request {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private Student student; // Relationship is correct
+    private Student student;
 
     private String documentType;
     private String purpose;
@@ -28,7 +28,7 @@ public class Request {
     private LocalDate appointmentDate;
     private LocalTime appointmentTime;
 
-    // --- FINAL MANUAL GETTERS AND SETTERS ---
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getTransactionCode() { return transactionCode; }
