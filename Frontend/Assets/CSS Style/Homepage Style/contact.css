@@ -16,6 +16,12 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); co
     transform: translateY(-2px);
     position: relative;
 }
+
+
+
+
+
+
 .nav-link { color: rgba(255,255,255,0.8) !important; font-weight: 500; font-size: 1rem; margin-left: 25px; transition: 0.3s; }
 .nav-link:hover, .nav-link.active { color: var(--accent-gold) !important; font-weight: 700; }
 
