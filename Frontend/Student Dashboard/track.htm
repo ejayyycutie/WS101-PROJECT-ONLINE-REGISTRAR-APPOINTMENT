@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Status - NSC</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/Student/student_track.css">
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container px-4">
+        <a class="navbar-brand d-flex align-items-center" href="/student/dashboard.htm">
+            <img src="/assets/img/logo.png" onerror="this.src='https://via.placeholder.com/50?text=LOGO'" height="40" class="me-2 rounded-circle" style="border: 2px solid rgba(255,255,255,0.2);">
+            <span class="brand-text">Track Status</span>
+        </a>
+        <div class="ms-auto">
+            <a href="/student/dashboard.htm" class="profile-btn"><i class="fas fa-arrow-left me-2"></i> Dashboard</a>
+        </div>
+    </div>
+</nav>
+
+<div class="dashboard-hero">
+    <div class="container text-center">
+        <h1 class="welcome-title">Track Request</h1>
+        <p class="welcome-sub">Monitor the progress of your document application.</p>
+    </div>
+</div>
+
+<div class="container">
+    <form action="" method="GET" class="floating-search">
+        <input type="text" name="search" class="search-field" placeholder="Enter Transaction Code (e.g. REQ-8821)">
+        <button type="button" class="search-btn">Search</button>
+    </form>
+</div>
+
+<div class="container pb-5">
+    <div class="track-card" id="trackContainer">
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-spinner fa-spin fa-2x"></i><br>Loading requests...
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        const studentId = localStorage.getItem('nsc_student_id');
+        if (studentId) {
+            loadMyRequests(studentId);
+        } else {
+            alert("Session expired. Please login again.");
+            window.location.href = '/login_student.htm';
+        }
+
+        // Ensure search button works (prevents default form submission if not handled by API)
+        $('.search-btn').on('click', function(e) {
+            e.preventDefault();
+            // Implement search logic here, e.g., filter requests or send new API call
+            alert("Search function clicked for Transaction Code: " + $('.search-field').val());
+        });
+    });
+
+    function loadMyRequests(sid) {
+        $.ajax({
+            url: '/api/student/requests',
+            type: 'GET',
+            data: { student_id: sid },
+            success: function(data) {
+                var container = $('#trackContainer');
+                container.empty();
+
+                if (data.length === 0) {
+                    container.html(`
+                        <div class="text-center py-5">
+                            <h4 class="fw-bold text-muted">No Requests Found</h4>
+                            <p class="text-muted">You haven't submitted any requests yet.</p>
+                            <a href="/student/request.htm" class="btn btn-warning rounded-pill px-4 fw-bold mt-2 text-white shadow">Request Now</a>
+                        </div>
+                    `);
+                    return;
+                }
+
+                $.each(data, function(i, req){
+                    var statusClass = "";
+                    var icon = "";
+                    var statusTitle = "";
+                    var statusMsg = "";
+                    var extraHtml = "";
+
+                    // --- COMPLETE LOGIC ---
+                    if(req.status === 'Pending') {
+                        statusClass = "t-active";
+                        icon = '<i class="fas fa-cog fa-spin"></i>';
+                        statusTitle = "Verification in Progress";
+                        statusMsg = "Registrar is currently reviewing your academic records.";
+
+                    } else if (req.status === 'Approved') {
+                        statusClass = "t-done";
+                        icon = '<i class="fas fa-check"></i>';
+                        statusTitle = "Approved & Scheduled";
+                        statusMsg = "Your request has been approved. See schedule below.";
+                        extraHtml = `<div class="appointment-ticket"><div><div class="at-label">Date</div><div class="at-date">${req.sched_date || 'TBA'}</div></div><div><div class="at-label">Time</div><div class="at-time">${req.sched_time || ''}</div></div></div>`;
+
+                    } else if (req.status === 'Completed') {
+                        statusClass = "t-done";
+                        icon = '<i class="fas fa-check-double"></i>';
+                        statusTitle = "Transaction Completed";
+                        statusMsg = "Document has been claimed. Thank you!";
+
+                    } else {
+                        statusClass = "t-fail";
+                        icon = '<i class="fas fa-times"></i>';
+                        statusTitle = "Request Declined";
+                        statusMsg = "Please visit the Registrar's Office for details.";
+                    }
+
+                    var cardHtml = `
+                    <div class="border-bottom pb-4 mb-4">
+                        <div class="d-flex justify-content-between align-items-end mb-3">
+                            <div><small class="text-muted text-uppercase fw-bold letter-spacing-1">Document Type</small><h3 class="fw-bold text-dark m-0">${req.document_type}</h3></div>
+                            <div class="text-end"><span class="badge bg-primary px-3 py-2 rounded-pill mb-1">ID: ${req.transaction_code}</span><div class="small text-muted">${req.date_requested.split("T")[0]}</div></div>
+                        </div>
+                        <div class="timeline-wrapper">
+                            <div class="timeline-item t-done"><div class="timeline-icon"><i class="fas fa-file-alt"></i></div><div class="timeline-content"><h5>Request Submitted</h5><p>Application received.</p></div></div>
+
+                            <div class="timeline-item ${statusClass}"><div class="timeline-icon">${icon}</div><div class="timeline-content"><h5 class="${req.status === 'Completed' || req.status === 'Approved' ? 'text-success' : (req.status === 'Declined' ? 'text-danger' : 'text-primary')}">${statusTitle}</h5><p>${statusMsg}</p>${extraHtml}</div></div>
+
+                            ${(req.status === 'Approved' || req.status === 'Completed') ?
+                              `<div class="timeline-item ${req.status === 'Completed' ? 't-done' : 't-active'}">
+                                  <div class="timeline-icon"><i class="fas fa-hand-holding"></i></div>
+                                  <div class="timeline-content">
+                                      <h5 class="${req.status === 'Completed' ? 'text-success' : 'text-primary'}">Claim Document</h5>
+                                      <p>${req.status === 'Completed' ? 'Document Claimed.' : 'Bring your ID and Transaction Code.'}</p>
+                                  </div>
+                              </div>` : ''}
+                        </div>
+                    </div>`;
+                    container.append(cardHtml);
+                });
+            }
+        });
+    }
+
+
+
+</script>
+</body>
+</html>

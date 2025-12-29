@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request - NSC Student</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/Student/student_request.css">
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container px-4">
+        <a href="/student/dashboard.htm" class="navbar-brand d-flex align-items-center">
+            <img src="/assets/img/logo.png" onerror="this.src='https://via.placeholder.com/50?text=LOGO'" height="40" class="me-2 rounded-circle" style="border: 2px solid rgba(255,255,255,0.2);">
+            <span class="brand-text">NSC REQUEST</span>
+        </a>
+        <div class="ms-auto">
+            <a href="/student/dashboard.htm" class="profile-btn">
+                <i class="fas fa-arrow-left me-2"></i> Dashboard
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <div class="hero-blob hb-1"></div>
+    <div class="container">
+        <h1 class="fw-bold display-5 mb-2">Request Documents</h1>
+        <p class="opacity-75">Select the document you need and we'll process it.</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="glass-card">
+                <form id="requestForm">
+                    <input type="hidden" name="student_id" id="form-student-id">
+                    <div class="mb-4">
+                        <label class="form-label">Type of Document</label>
+                        <select class="form-select" name="doc_type" required>
+                            <option selected disabled value="">Tap to select document...</option>
+                            <option value="Transcript of Records">Transcript of Records (TOR)</option>
+                            <option value="Diploma">Diploma</option>
+                            <option value="Certificate of Grades">Certificate of Grades</option>
+                            <option value="Good Moral">Good Moral Character</option>
+                            <option value="Honorable Dismissal">Honorable Dismissal</option>
+                        </select>
+                    </div>
+                    <div class="mb-4"><label class="form-label">Purpose of Request</label><textarea class="form-control" name="purpose" rows="3" placeholder="e.g. Board Exam..." required></textarea></div>
+                    <div class="mb-5"><label class="form-label">Number of Copies</label><input type="number" name="copies" class="form-control fw-bold text-center" value="1" min="1" max="5" required></div>
+                    <button type="submit" class="btn-submit">Submit Application <i class="fas fa-paper-plane ms-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        const studentId = localStorage.getItem('nsc_student_id');
+        if(studentId) { $('#form-student-id').val(studentId); }
+        else { alert("Session expired."); window.location.href = '/login_student.htm'; }
+
+        $('#requestForm').submit(function(e){
+            e.preventDefault();
+            $('.btn-submit').html('<i class="fas fa-spinner fa-spin"></i> Processing...').prop('disabled', true);
+            $.ajax({
+                url: '/api/request/submit',
+                type: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(res){
+                    if(res.status == 'success'){ alert("Success! Code: " + res.code); window.location.href = '/student/track.htm'; }
+                    else { alert("Error: " + res.message); $('.btn-submit').html('Submit Application').prop('disabled', false); }
+                },
+                error: function() { alert("System Error."); $('.btn-submit').html('Submit Application').prop('disabled', false); }
+            });
+        });
+    });
+</script>
+</body>
+</html>

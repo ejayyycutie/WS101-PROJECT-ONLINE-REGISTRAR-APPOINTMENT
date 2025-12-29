@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - NSC Registrar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/Registrar/registrar_dashboard.css">
+    
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="brand-box">
+        <img src="/assets/img/logo.png" class="brand-logo" onerror="this.src='https://via.placeholder.com/50?text=LOGO'">
+        <div class="brand-text"><h5>NSC REGISTRAR</h5><span>System Panel</span></div>
+    </div>
+    <nav class="nav-menu">
+        <a href="dashboard.htm" class="nav-item active"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="verification.htm" class="nav-item"><i class="fas fa-file-signature"></i> Verification</a>
+        <a href="appointments.htm" class="nav-item"><i class="fas fa-calendar-alt"></i> Appointments</a>
+        <a href="records.htm" class="nav-item"><i class="fas fa-users"></i> Student Records</a>
+        <a href="settings.htm" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+    </nav>
+    <div class="logout-box">
+        <a href="../login_registrar.htm" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <h2 class="page-title">Dashboard Overview</h2>
+    <p class="page-subtitle">Welcome back, Registrar Officer! Here's what's happening today.</p>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="stat-card" style="border-color: #fbbf24;">
+                <div><h2 class="fw-bold m-0" id="stat-pending">...</h2><small class="text-muted fw-bold">PENDING REQUESTS</small></div>
+                <div class="stat-icon" style="background: #fffbeb; color: #fbbf24;"><i class="fas fa-clock"></i></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card" style="border-color: #10b981;">
+                <div><h2 class="fw-bold m-0" id="stat-sched">...</h2><small class="text-muted fw-bold">APPROVED TODAY</small></div>
+                <div class="stat-icon" style="background: #ecfdf5; color: #10b981;"><i class="fas fa-calendar-check"></i></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card" style="border-color: #3b82f6;">
+                <div><h2 class="fw-bold m-0" id="stat-students">...</h2><small class="text-muted fw-bold">TOTAL STUDENTS</small></div>
+                <div class="stat-icon" style="background: #eff6ff; color: #3b82f6;"><i class="fas fa-users"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <h5 class="fw-bold text-primary mb-4">Recent Requests</h5>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead><tr><th>Trans. ID</th><th>Student</th><th>Document</th><th>Date</th></tr></thead>
+                <tbody id="pendingTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: '/api/registrar/stats', type: 'GET',
+            success: function(data) {
+                $('#stat-pending').text(data.pending);
+                $('#stat-sched').text(data.approved_today);
+                $('#stat-students').text(data.total_students);
+            }
+        });
+        $.ajax({
+            url: '/api/registrar/requests/pending', type: 'GET',
+            success: function(data) {
+                var rows = "";
+                if(data.length === 0) { rows = '<tr><td colspan="4" class="text-center text-muted py-3">No pending requests.</td></tr>'; }
+                else {
+                    $.each(data, function(i, req){
+                        rows += `<tr><td><span class="badge bg-light text-dark border">${req.transaction_code}</span></td><td><div class="fw-bold">${req.student_name}</div><small class="text-muted">${req.program}</small></td><td>${req.document_type}</td><td>${req.date_requested.split('T')[0]}</td></tr>`;
+                    });
+                }
+                $('#pendingTableBody').html(rows);
+            }
+        });
+    });
+</script>
+</body>
+</html>
