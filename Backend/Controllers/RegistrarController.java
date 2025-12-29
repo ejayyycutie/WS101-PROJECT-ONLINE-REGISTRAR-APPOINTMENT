@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/registrar")
 public class RegistrarController {
 
+
     private final RequestRepository requestRepo;
     private final StudentRepository studentRepo;
     private final RegistrarRepository registrarRepo;
