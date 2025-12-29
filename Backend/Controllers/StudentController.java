@@ -19,6 +19,8 @@ import java.util.Optional;
 @RequestMapping("/api/registrar")
 public class StudentController {
 
+
+
     private final StudentRepository studentRepo;
     private final RequestRepository requestRepo;
 
@@ -27,7 +29,7 @@ public class StudentController {
         this.requestRepo = requestRepo;
     }
 
-    // --- 1. LIST ALL STUDENTS (ALPHABETICAL BY LASTNAME) ---
+
     @GetMapping("/students")
     public List<Student> getAllStudents() {
         // Sort by 'lastname' in Ascending order (A-Z)
