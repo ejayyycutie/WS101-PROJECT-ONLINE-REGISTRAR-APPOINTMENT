@@ -8,6 +8,10 @@
         .hb-2 { width: 400px; height: 400px; background: rgba(251, 191, 36, 0.15); bottom: -100px; right: -100px; animation-delay: 1s; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
+
+
+
+
         .form-control-dark { background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 50px; padding: 15px 20px 15px 50px; color: white; transition: 0.3s; }
         .form-control-dark:focus { border-color: var(--accent-gold); outline: none; background: rgba(255,255,255,0.1); color: white; }
         .input-wrapper { position: relative; }
