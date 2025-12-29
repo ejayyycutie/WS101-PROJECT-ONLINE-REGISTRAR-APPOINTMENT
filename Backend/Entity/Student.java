@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Student {
 
     @Id
-    private String studentId; // FINAL: String PK
+    private String studentId;
 
     private String firstname;
     private String lastname;
@@ -20,7 +20,7 @@ public class Student {
     private String email;
     private String phone;
 
-    // Added Profile Picture Field
+
     @Lob
     @Column(columnDefinition = "LONGTEXT")
     private String profilePic;
