@@ -5,6 +5,12 @@
 :root { --primary-blue: #0f204b; --accent-blue: #2a5bd7; --accent-gold: #fbbf24; --bg-light: #f8faff; --text-dark: #1e293b; }
 body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: var(--text-dark); overflow-x: hidden; }
 
+
+
+
+
+
+
 /* Navbar Default (Desktop) */
 .navbar { background: rgba(15, 32, 75, 0.95); padding: 15px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 .navbar-brand img { height: 70px; width: 70px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); margin-right: 15px; object-fit: cover; }
